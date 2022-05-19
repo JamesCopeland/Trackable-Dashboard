@@ -23,6 +23,11 @@ function welcomeUser(username) {
     tableArea.classList.remove('d-none');
     // welcomeDiv.classList.remove('d-none');
     // callApiButton.classList.remove('d-none');
+    
+    getTasks()
+    .then(function (response) {
+      buildTable(response)
+    })
 }
 
 function logMessage(s) {

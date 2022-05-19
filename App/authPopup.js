@@ -139,17 +139,17 @@ function getTokenPopup(request) {
         });
 }
 
-function passTokenToApi() {
-    console.log('passing token')
-    getTokenPopup(tokenRequest)
+function passTokenToApi(endpoint, options, headers) {
+
+    endpoint = endpoint || "/Tasks"
+    const fullEndpoint = apiConfig.webApi + endpoint;
+
+    return getTokenPopup(tokenRequest)
         .then(response => {
             if (response) {
                 console.log("access_token acquired at: " + new Date().toString());
                 try {
-                    callApi(apiConfig.webApi, response.accessToken)
-                    .then(data => {
-                        buildTable(data)
-                    })
+                    return callApi(fullEndpoint, response.accessToken, options, headers)
                 } catch (error) {
                     console.log(error);
                 }

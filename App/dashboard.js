@@ -1,11 +1,5 @@
 /* globals Chart:false, feather:false */
 const baseURL = "https://trackableapi.azurewebsites.net";
-//const baseURL = "https://localhost:7259";
-
-// getTasks()
-// .then(function (response) {
-//   buildTable(response.data)
-// })
 
 function buildTable(data) {
   var table = document.getElementById("task-table-body")
@@ -17,7 +11,7 @@ function buildTable(data) {
     buildCell(2, row, element.message)
     buildCell(3, row, element.status)
     buildCell(4, row, element.type)
-    buildCell(5, row, `<button type="button" class="btn btn-danger delete-btn" onclick="deleteTask(this, ${element.id})">Delete</button>`)
+    buildCell(5, row, `<button type="button" class="btn btn-danger delete-btn" onclick="deleteTask(this, ${element.taskId})">Delete</button>`)
 
   });
 }
@@ -49,36 +43,45 @@ newTaskForm.addEventListener('submit', function(event) {
 
 function createTask(newTask) {
 
-  var headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
+  const endpoint = "/Tasks"
+
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json")
+  headers.append("Access-Control-Allow-Origin", "*")
+
+  const options = {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(newTask)
   }
-
-  return (axios.post(`${baseURL}/api/Tasks`, newTask, { headers } )
-  .then(function (response) {
-    // handle success
-    getTasks().then(function(response) {
+  
+  return (passTokenToApi(endpoint, options, headers)
+  .then(postResponse => {
+    getTasks().then(function(data) {
       clearTable()
-      buildTable(response.data)
-      let modalEl = document.getElementById("createTaskModal")
-      let modal = bootstrap.Modal.getInstance(modalEl)
-      modal.hide()
-
+      buildTable(data)
+      $("#createTaskModal").modal('hide')
       newTaskForm.reset()
     })
   }))
-  
+
 }
 
 function getTasks() {
-  return axios({
-    method: 'get',
-    url: `${baseURL}/api/Tasks`,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    }
-  })
+
+  const endpoint = "/Tasks"
+
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json")
+  headers.append("Access-Control-Allow-Origin", "*")
+
+  const options = {
+    method: "GET",
+    headers: headers
+  }
+
+  return passTokenToApi(endpoint, options, headers)
+
 }
 
 function clearTable() {
@@ -87,19 +90,25 @@ function clearTable() {
 }
 
 function deleteTask(element, id) {
+
+  const endpoint = `/Tasks/${id}`
+
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json")
+  headers.append("Access-Control-Allow-Origin", "*")
+
+  const options = {
+    method: "DELETE",
+    headers: headers,
+  }
+
   var row = element.parentNode.parentNode;
 
-  return axios({
-    method: 'delete',
-    url: `${baseURL}/api/Tasks/${id}`,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    }
-  })
-  .then(function (response) {
-    // handle success
-    row.remove();
-  })
+  return (passTokenToApi(endpoint, options, headers)
+    .then(function (response) {
+      // handle success
+      row.remove();
+    })
+  )
   
 }
