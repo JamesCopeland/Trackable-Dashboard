@@ -1,5 +1,7 @@
 # Trackable-Dashboard
 
+Hosted app: https://witty-stone-0a801e90f.1.azurestaticapps.net/
+
 ## Description
 This is the frontend website for my Trackable demo app. The app is simply a task-tracking app that will allow users to create, edit, and delete their tasks 
 as well as track their open tasks over time. 
