@@ -11,14 +11,19 @@ function buildTable(data) {
     buildCell(2, row, element.message)
     buildCell(3, row, element.status)
     buildCell(4, row, element.type)
-    buildCell(5, row, `<button type="button" class="btn btn-danger delete-btn" onclick="deleteTask(this, ${element.taskId})">Delete</button>`)
+    buildCell(5, row, `<button type="button" class="btn btn-secondary edit-btn" onclick="editTask(this, ${element.taskId})">Edit</button>`, true)
+    buildCell(6, row, `<button type="button" class="btn btn-danger delete-btn" onclick="deleteTask(this, ${element.taskId})">Delete</button>`, true)
 
   });
 }
 
-function buildCell(i, row, text) {
+function buildCell(i, row, text, isBtnCell) {
   var cell = row.insertCell(i)
   cell.innerHTML = text
+
+  if(isBtnCell) {
+    cell.classList.add('btn-cell')
+  }
 }
 
 var newTaskForm = document.getElementById("newTaskForm")

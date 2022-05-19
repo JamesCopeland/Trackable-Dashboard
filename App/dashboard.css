@@ -1,0 +1,9 @@
+/* custom CSS */
+
+.btn-cell {
+    width: 110px;
+}
+
+.btn-cell > button {
+    width: 90px
+}

@@ -16,6 +16,7 @@
 
     <!-- adding Bootstrap 4 for UI components  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./dashboard.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -38,7 +39,7 @@
 
     <div style="margin: 70px 50px 0px 50px" id="tableArea" class="d-none">
       <div>
-        <h2 style="display: inline-block;">Task List</h2><button style="float: right;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#createTaskModal">Create</button>
+        <h2 style="display: inline-block;">Task List</h2><button style="float: right; width: 110px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#createTaskModal">Create</button>
       </div>
       
       <div class="table-responsive">
@@ -50,6 +51,7 @@
               <th scope="col">Message</th>
               <th scope="col">Status</th>
               <th scope="col">Type</th>
+              <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
