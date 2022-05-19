@@ -1,9 +1,10 @@
 function callApi(endpoint, token) {
-    
+    console.log(token)
     const headers = new Headers();
     const bearer = `Bearer ${token}`;
   
     headers.append("Authorization", bearer);
+    headers.append("Content-Type", "application/json")
   
     const options = {
         method: "GET",
@@ -12,16 +13,10 @@ function callApi(endpoint, token) {
   
     logMessage('Calling web API...');
     
-    fetch(endpoint, options)
+    return (fetch(endpoint, options)
       .then(response => response.json())
-      .then(response => {
-
-        if (response) {
-          logMessage('Web API responded: ' + response.name);
-        }
-        
-        return response;
-      }).catch(error => {
+      .catch(error => {
         console.error(error);
-      });
+      })
+    );
   }

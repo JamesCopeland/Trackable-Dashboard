@@ -6,8 +6,9 @@ let accountId = "";
 let username = "";
 
 function setAccount(account) {
+    console.log(account)
     accountId = account.homeAccountId;
-    username = account.username;
+    username = account.name;
     welcomeUser(username);
 }
 
@@ -139,12 +140,16 @@ function getTokenPopup(request) {
 }
 
 function passTokenToApi() {
+    console.log('passing token')
     getTokenPopup(tokenRequest)
         .then(response => {
             if (response) {
                 console.log("access_token acquired at: " + new Date().toString());
                 try {
-                    callApi(apiConfig.webApi, response.accessToken);
+                    callApi(apiConfig.webApi, response.accessToken)
+                    .then(data => {
+                        buildTable(data)
+                    })
                 } catch (error) {
                     console.log(error);
                 }
