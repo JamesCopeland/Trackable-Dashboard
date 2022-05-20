@@ -151,6 +151,7 @@ function getTasks() {
   return (passTokenToApi(endpoint, options, headers)
     .then(data => {
       taskObject = data;
+      return data;
     })
     .catch(error => {
       taskObject = {}
