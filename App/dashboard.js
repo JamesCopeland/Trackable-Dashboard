@@ -43,7 +43,8 @@ newTaskForm.addEventListener('submit', function(event) {
     "Message": message,
     "Status": status,
     "Type": type,
-    "Trace": ""
+    "Trace": "",
+    "accountId": sub
   })
 })
 
@@ -63,7 +64,8 @@ updateTaskForm.addEventListener('submit', function(event) {
     "Message": message,
     "Status": status,
     "Type": type,
-    "Trace": ""
+    "Trace": "",
+    "accountId": sub
   })
 })
 

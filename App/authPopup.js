@@ -4,11 +4,13 @@ const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let accountId = "";
 let username = "";
+let sub = "";
 
 function setAccount(account) {
     console.log(account)
     accountId = account.homeAccountId;
     username = account.name;
+    sub = account.localAccountId;
     welcomeUser(username);
 }
 
