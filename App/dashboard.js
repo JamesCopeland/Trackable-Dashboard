@@ -58,6 +58,7 @@ updateTaskForm.addEventListener('submit', function(event) {
   var id = document.getElementById("update-task-id").value
 
   updateTask(id, {
+    "TaskId": id,
     "Name": name,
     "Message": message,
     "Status": status,
